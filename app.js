@@ -202,7 +202,8 @@ function updateRing(pct) {
 }
 
 function startMeditation() {
-    if (!getCtx() || audioCtx.state === 'suspended') getCtx();
+    getCtx();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
     setVol($('medVolume').value / 100);
     stopAllNodes();
     SOUND_MAP[selectedSound]();
