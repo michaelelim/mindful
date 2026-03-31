@@ -3,4 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
+    <title>Mindful</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2381c784'><circle cx='12' cy='8' r='4'/><path d='M12 14c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z'/><path d='M4 22h16v-1H4v1z'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <main class="app">
+        <header>
+            <div class="logo"><span class="logo-icon">🧘</span><span class="logo-text">Mindful</span></div>
+        </header>
+        <div class="tabs">
+            <button class="tab active" data-tab="meditation">🧘 Meditation</button>
+            <button class="tab" data-tab="breath">🌬️ Breathing</button>
+        </div>
+        <section class="panel" id="meditationPanel">
+            <div class="timer-ring-container">
+                <svg class="timer-ring" viewBox="0 0 200 200">
+                    <circle class="ring-bg" cx="100" cy="100" r="90"/>
+                    <circle class="ring-progress" cx="100" cy="100" r="90" id="ringProgress"/>
+                </svg>
+                <div class="timer-center">
+                    <div class="timer-display" id="timerDisplay">05:00</div>
+                    <div class="timer-label" id="timerLabel">Set duration</div>
+                </div>
+            </div>
+            <div class="duration-pills" id="durationPills">
+                <button class="pill" data-min="3">3m</button>
+                <button class="pill" data-min="5">5m</button>
+                <button class="pill selected" data-min="10">10m</button>
+                <button class="pill" data-min="15">15m</button>
+                <button class="pill" data-min="20">20m</button>
+                <button class="pill" data-min="30">30m</button>
+            </div>
+            <div class="sounds-section">
+                <label>Ambient sound</label>
+                <div class="sound-row">
+                    <button class="sound-pill sel" data-sound="silence">🔇 Silence</button>
+                    <button class="sound-pill" data-sound="ocean">🌊 Ocean</button>
+                    <button class="sound-pill" data-sound="rain">🌧️ Rain</button>
+                    <button class="sound-pill" data-sound="birds">🐦 Birds</button>
+                    <button class="sound-pill" data-sound="bowl">🔔 Bowl</button>
+                    <button class="sound-pill" data-sound="wind">🍃 Wind</button>
+                </div>
+                <div class="volume-row">
+                    <span>Vol</span>
+                    <input type="range" id="medVolume" min="0" max="100" value="40">
+                    <span id="medVolVal">40%</span>
+                </div>
+            </div>
+            <button class="start-btn" id="medStartBtn">Start Meditation</button>
+            <div class="stats-row" id="medStats">
+                <div class="stat"><span class="stat-val" id="statSessions">0</span><span class="stat-lbl">Sessions</span></div>
+                <div class="stat"><span class="stat-val" id="statMinutes">0</span><span class="stat-lbl">Minutes</span></div>
+                <div class="stat"><span class="stat-val" id="statStreak">0</span><span class="stat-lbl">Day streak</span></div>
+            </div>
+        </section>
+        <section class="panel hidden" id="breathPanel">
+            <div class="breath-visual" id="breathVisual">
+                <div class="breath-circle" id="breathCircle">
+                    <span class="breath-text" id="breathText">Ready</span>
+                </div>
+            </div>
+            <div class="pattern-section">
+                <label>Pattern</label>
+                <div class="pattern-row">
+                    <button class="pattern-chip sel" data-pattern="box" data-label="Box (4-4-4-4)">Box 4-4-4-4</button>
+                    <button class="pattern-chip" data-pattern="relax" data-label="Relaxing (4-7-8)">Relaxing 4-7-8</button>
+                    <button class="pattern-chip" data-pattern="balance" data-label="Balance (4-4)">4-4 Balance</button>
+                    <button class="pattern-chip" data-pattern="energy" data-label="Energizing">4-4-4 Energizing</button>
+                </div>
+            </div>
+            <div class="option-row">
+                <label>Rounds</label>
+                <div class="range-group">
+                    <input type="range" id="breathRounds" min="3" max="20" value="6">
+                    <span id="roundsVal">6</span>
+                </div>
+            </div>
+            <button class="start-btn green" id="breathStartBtn">Start Breathing Session</button>
+        </section>
+    </main>
+    <footer><p>Built by <a href="https://michaelelim.github.io/" target="_blank">Michael Lim</a> · All audio generated in-browser</p></footer>
+    <script src="app.js"></script>
+</body>
+</html>
