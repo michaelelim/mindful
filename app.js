@@ -12,9 +12,16 @@ function getCtx() {
     return audioCtx;
 }
 
+let activeIntervals = [];
+let activeTimeouts = [];
+
 function stopAllNodes() {
     currentNodes.forEach(n => { try { n.stop(); } catch(e) {} });
     currentNodes = [];
+    activeIntervals.forEach(i => { try { clearInterval(i); } catch(e) {} });
+    activeIntervals = [];
+    activeTimeouts.forEach(t => { try { clearTimeout(t); } catch(e) {} });
+    activeTimeouts = [];
 }
 
 function setVol(v) { if (gainNode) gainNode.gain.linearRampToValueAtTime(v, getCtx().currentTime + 0.1); }
@@ -118,7 +125,7 @@ function birdsNoise() {
         g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.25);
         osc.connect(g); g.connect(gainNode);
         osc.start(ctx.currentTime); osc.stop(ctx.currentTime+0.25);
-        if (running) setTimeout(chirp, 300+Math.random()*600);
+        if (running) { const t = setTimeout(chirp, 300+Math.random()*600); activeTimeouts.push(t); }
     }
     chirp();
 }
@@ -139,7 +146,13 @@ function bowlSound() {
         });
     }
     strike();
-    setTimeout(strike, 8000);
+    const t = setTimeout(strike, 8000);
+    const loop = () => {
+        strike();
+        const t2 = setTimeout(loop, 8000);
+        activeTimeouts.push(t2);
+    };
+    activeTimeouts.push(t, setTimeout(loop, 16000));
 }
 
 // Wind
