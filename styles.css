@@ -34,8 +34,11 @@ header{text-align:center;margin-bottom:28px}
 .pill:hover{border-color:var(--accent);color:var(--text)}.pill.selected{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
 .sounds-section label,.pattern-label,.option-row label{display:block;font-size:13px;font-weight:600;color:var(--text-dim);margin-bottom:6px}
 .sound-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.sound-row-item{display:flex;align-items:center;gap:2px}
 .sound-pill{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--text-dim);cursor:pointer;transition:all var(--ease);font-family:var(--font);white-space:nowrap}
 .sound-pill:hover{border-color:var(--accent)}.sound-pill.sel{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
+.preview-btn{background:none;border:none;padding:4px 6px;font-size:13px;cursor:pointer;opacity:0.5;transition:opacity var(--ease);line-height:1}
+.preview-btn:hover{opacity:1}
 .volume-row{display:flex;align-items:center;gap:10px;margin-top:6px}
 .volume-row input[type=range]{flex:1;height:6px;-webkit-appearance:none;appearance:none;background:var(--border);border-radius:4px;outline:none}
 .volume-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#81c784,#38bdf8);cursor:pointer;box-shadow:0 2px 8px rgba(129,199,132,.4)}

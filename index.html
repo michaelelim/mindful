@@ -42,12 +42,30 @@
             <div class="sounds-section">
                 <label>Ambient sound</label>
                 <div class="sound-row">
-                    <button class="sound-pill sel" data-sound="silence">🔇 Silence</button>
-                    <button class="sound-pill" data-sound="ocean">🌊 Ocean</button>
-                    <button class="sound-pill" data-sound="rain">🌧️ Rain</button>
-                    <button class="sound-pill" data-sound="birds">🐦 Birds</button>
-                    <button class="sound-pill" data-sound="bowl">🔔 Bowl</button>
-                    <button class="sound-pill" data-sound="wind">🍃 Wind</button>
+                    <div class="sound-row-item">
+                        <button class="sound-pill sel" data-sound="silence">🔇 Silence</button>
+                        <button class="preview-btn" data-sound="silence" title="Preview">▶️</button>
+                    </div>
+                    <div class="sound-row-item">
+                        <button class="sound-pill" data-sound="ocean">🌊 Ocean</button>
+                        <button class="preview-btn" data-sound="ocean" title="Preview">▶️</button>
+                    </div>
+                    <div class="sound-row-item">
+                        <button class="sound-pill" data-sound="rain">🌧️ Rain</button>
+                        <button class="preview-btn" data-sound="rain" title="Preview">▶️</button>
+                    </div>
+                    <div class="sound-row-item">
+                        <button class="sound-pill" data-sound="birds">🐦 Birds</button>
+                        <button class="preview-btn" data-sound="birds" title="Preview">▶️</button>
+                    </div>
+                    <div class="sound-row-item">
+                        <button class="sound-pill" data-sound="bowl">🔔 Bowl</button>
+                        <button class="preview-btn" data-sound="bowl" title="Preview">▶️</button>
+                    </div>
+                    <div class="sound-row-item">
+                        <button class="sound-pill" data-sound="wind">🍃 Wind</button>
+                        <button class="preview-btn" data-sound="wind" title="Preview">▶️</button>
+                    </div>
                 </div>
                 <div class="volume-row">
                     <span>Vol</span>
@@ -72,22 +90,19 @@
                 <label>Pattern</label>
                 <div class="pattern-row">
                     <button class="pattern-chip sel" data-pattern="box" data-label="Box (4-4-4-4)">Box 4-4-4-4</button>
-                    <button class="pattern-chip" data-pattern="relax" data-label="Relaxing (4-7-8)">Relaxing 4-7-8</button>
-                    <button class="pattern-chip" data-pattern="balance" data-label="Balance (4-4)">4-4 Balance</button>
-                    <button class="pattern-chip" data-pattern="energy" data-label="Energizing">4-4-4 Energizing</button>
+                    <button class="pattern-chip" data-pattern="relax" data-label="4-7-8 Relax">4-7-8</button>
+                    <button class="pattern-chip" data-pattern="balance" data-label="4-4 Balance">4-4</button>
+                    <button class="pattern-chip" data-pattern="energy" data-label="4-4-4 Energy">4-4-4</button>
+                </div>
+                <div class="option-row">
+                    <label>Rounds</label>
+                    <input type="range" id="breathRounds" min="1" max="20" value="5">
+                    <span id="roundsVal">5</span>
                 </div>
             </div>
-            <div class="option-row">
-                <label>Rounds</label>
-                <div class="range-group">
-                    <input type="range" id="breathRounds" min="3" max="20" value="6">
-                    <span id="roundsVal">6</span>
-                </div>
-            </div>
-            <button class="start-btn green" id="breathStartBtn">Start Breathing Session</button>
+            <button class="start-btn" id="breathStartBtn">Start Breathing Session</button>
         </section>
     </main>
-    <footer><p>Built by <a href="https://michaelelim.github.io/" target="_blank">Michael Lim</a> · All audio generated in-browser</p></footer>
     <script src="app.js"></script>
 </body>
 </html>

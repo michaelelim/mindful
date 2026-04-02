@@ -179,6 +179,54 @@ const SOUND_MAP = {
     brown: brownNoise, pink: pinkNoise, white: whiteNoise,
 };
 
+// ── Sound Preview (play 4 seconds for testing) ────────────
+let previewCtx = null;
+let previewNodes = [];
+let previewActive = null;
+
+function playPreview(sound) {
+    if (previewCtx) {
+        previewCtx.close();
+        previewCtx = null;
+        previewNodes = [];
+        previewActive = null;
+    }
+    if (sound === 'silence') return;
+    previewActive = sound;
+
+    // Create isolated context so it doesn't clash with meditation audio
+    previewCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const pGain = previewCtx.createGain();
+    pGain.gain.value = 0.4;
+    pGain.connect(previewCtx.destination);
+
+    const nodes = [];
+    const fn = SOUND_MAP[sound];
+    if (!fn) return;
+
+    // Temporarily swap out gainNode for preview
+    const savedGain = gainNode;
+    const savedCtx = audioCtx;
+    gainNode = pGain;
+    audioCtx = previewCtx;
+
+    fn();
+
+    // Restore
+    gainNode = savedGain;
+    audioCtx = savedCtx;
+
+    // Stop after 4 seconds
+    setTimeout(() => {
+        if (previewActive === sound) {
+            previewCtx.close();
+            previewCtx = null;
+            previewNodes = [];
+            previewActive = null;
+        }
+    }, 4000);
+}
+
 // ── Meditation ────────────────────────────────────────────
 let timerInt = null;
 let running = false;
@@ -291,6 +339,26 @@ document.querySelectorAll('.sound-pill').forEach(p => p.addEventListener('click'
     document.querySelectorAll('.sound-pill').forEach(x=>x.classList.remove('selected'));
     p.classList.add('selected');
     selectedSound = p.dataset.sound;
+}));
+
+// Preview buttons
+document.querySelectorAll('.preview-btn').forEach(btn => btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // Stop any running preview
+    if (previewCtx) {
+        previewCtx.close();
+        previewCtx = null;
+        previewActive = null;
+        document.querySelectorAll('.preview-btn').forEach(b => b.textContent = '▶️');
+        return;
+    }
+    // Play this sound
+    const sound = btn.dataset.sound;
+    btn.textContent = '⏸️';
+    playPreview(sound);
+    setTimeout(() => {
+        btn.textContent = '▶️';
+    }, 4000);
 }));
 
 $('medVolume').addEventListener('input', e => {
